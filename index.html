@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html><head>
+<title>Social Media Links</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<style>
+#socialMediaIcons div{
+	display:inline-block;
+	height:24px;
+	opacity:.25;
+	width:24px;
+	-moz-transition-property:-o-transform,opacity;
+	-moz-transition-duration:1s,1s;
+	-ms-transition-property:-o-transform,opacity;
+	-ms-transition-duration:1s,1s;
+	-o-transition-property:-o-transform opacity;
+	-o-transition-duration:1s,1s;
+	-webkit-transition:-webkit-transform 1s,opacity 1s;
+	transition-property:transform,opacity;
+}
+#socialMediaIcons div:hover{
+	opacity:1;
+	-moz-transform:rotate(360deg);
+	-ms-transform:rotate(360deg);
+	-o-transform:rotate(360deg);
+	-webkit-transform:rotate(360deg);
+	transform:rotate(360);
+}
+#iconsFacebook{background:url('http://cdn.dohnetwork.com/global/social-icons.jpg') 0px 0px;}
+#iconsGitHub{background:url('http://cdn.dohnetwork.com/global/social-icons.jpg') 96px 0px;}
+#iconsGooglePlus{background:url('http://cdn.dohnetwork.com/global/social-icons.jpg') 72px 0px;}
+#iconsLinkedIn{background:url('http://cdn.dohnetwork.com/global/social-icons.jpg') 48px 0px;}
+#iconsTwitter{background:url('http://cdn.dohnetwork.com/global/social-icons.jpg') 24px 0px;}
+</style>
+</head><body>
+
+<script>
+socialMediaModule={
+	socialMediaIconsData:{
+		"links": [
+			{
+				"id": "iconsFacebook",
+				"altTag":"Facebook",
+				"data-value": "https://www.facebook.com/john.b.miller"
+			}
+			,{
+				"id": "iconsGitHub",
+				"altTag":"Git Hub",
+				"data-value": "https://github.com/johnbmiller/"
+			}
+			,{
+				"id": "iconsGooglePlus",
+				"altTag":"Google+",
+				"data-value": "https://plus.google.com/108451004515178647825/posts"
+			}
+			,{
+				"id": "iconsLinkedIn",
+				"altTag":"LinkedIn",
+				"data-value": "http://www.linkedin.com/profile/view?id=5574420"
+			}
+			,{
+				"id": "iconsTwitter",
+				"altTag":"Twitter",
+				"data-value": "https://twitter.com/johnnyleche"
+			}
+		]
+	}
+	,socialMediaIcons:{
+		createSocialDiv:function(){ // create icons and append to page
+			var iCount=0
+			,container=document.getElementsByTagName('body') // location to append to
+			,socialMediaIconsDiv=document.createElement('div')
+			,socialMediaIconsLinks=socialMediaModule.socialMediaIconsData.links
+			,iLength=socialMediaIconsLinks.length;
+			if(container&&iLength){ // create links if destination and link info exists
+				for(;iCount<iLength;iCount++){
+					socialMediaIconsLink=document.createElement('div');
+					socialMediaIconsLink.setAttribute('id',socialMediaIconsLinks[iCount].id)
+					socialMediaIconsLink.setAttribute('alt',socialMediaIconsLinks[iCount].altTag)
+					socialMediaIconsLink.setAttribute('title',socialMediaIconsLinks[iCount].altTag)
+					,socialMediaIconsLink.setAttribute('data-value',socialMediaIconsLinks[iCount]['data-value'])
+					,socialMediaIconsDiv.appendChild(socialMediaIconsLink);
+				}
+				socialMediaIconsDiv.setAttribute('id','socialMediaIcons')
+				,container[0].appendChild(socialMediaIconsDiv)
+				,socialMediaModule.socialMediaIcons.addListeners();
+			}
+		}
+		,addListeners:function(){ // add listeners
+			var iIconCount=0
+			,eIcons=document.getElementById('socialMediaIcons')
+			,aIcons=eIcons.getElementsByTagName('div')
+			,iIcons=aIcons.length			;
+			for (;iIconCount<iIcons;iIconCount++){
+				aIcons[iIconCount].addEventListener('click',socialMediaModule.socialMediaIcons.goToUrl);
+			}
+		}
+		,goToUrl:function(event){ // go to page if link is clicked
+			var url=event.target.attributes['data-value'].value;
+			window.open(url,'_blank');
+		}
+	}
+	,init:function(){ // start me up
+		if(socialMediaModule
+		&&socialMediaModule.socialMediaIcons
+		&&socialMediaModule.socialMediaIcons.createSocialDiv){
+			socialMediaModule.socialMediaIcons.createSocialDiv();
+		}
+	}
+};
+if(socialMediaModule
+&&socialMediaModule.init){
+	socialMediaModule.init();
+}
+</script>
+</body></html>
