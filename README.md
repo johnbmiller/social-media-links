@@ -1,4 +1,4 @@
 social-media-links
 ==================
 
-I created this module using javascript to manipulate the DOM with some CSS animation for effects.
+Javascript module to add social icons to manipulate the DOM with some CSS animation for effects.
